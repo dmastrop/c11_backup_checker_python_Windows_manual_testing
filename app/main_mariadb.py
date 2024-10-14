@@ -43,6 +43,23 @@ def configure_logging() -> None:
     root_logger.addHandler(console_handler)
 
 
+
+
+# problem with the mysql.connector.connect since version 8.0.29
+
+# use mariadb.connect instead and mariadb.Error class as well instead of mysql.connector.Error
+
+# With later versinos of maraidb the mysql.connector breaks (utf8 not supported error).  See this thread 
+
+# https://stackoverflow.com/questions/73244027/character-set-utf8-unsupported-in-python-mysql-connector
+
+# old code is in main_original.yml, new code is below. Tested from windows Wireguard client and it works well.
+
+# add import maraidb to top
+
+# add mariadb==1.1.10 to requirements.txt file so that Dockerfile can run this with the right dependency and import it accordingly
+
+# so 4 total edits to this file and requirements.txt
 def get_backups_table() -> Tuple:
     try:
         connection = mariadb.connect(

@@ -1,3 +1,4 @@
 venv_python
 .env
 .env~
+..env.un~
